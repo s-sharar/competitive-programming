@@ -1,30 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int machine, product;
-    cin >> machine >> product;
+    int numMachines;
+    long long targetProducts;
+    cin >> numMachines >> targetProducts;
 
-    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, ::greater<pair<ll, ll>>> pq;
-    ll x;
-    for (int i = 0; i < machine; ++i) {
-        cin >> x;
-        pq.push({x, x});
+    vector<long long> machineTime(numMachines);
+    for (int i = 0; i < numMachines; i++) cin >> machineTime[i];
+
+    auto canProduce = [&](long long timeLimit) -> bool {
+        __int128 totalProduced = 0;
+        for (long long t : machineTime) {
+            totalProduced += timeLimit / t;
+            if (totalProduced >= targetProducts) return true; // early stop
+        }
+        return totalProduced >= targetProducts;
+    };
+
+    long long low = 0;
+    long long high = 1;
+    while (!canProduce(high)) high *= 2;  // find an upper bound
+
+    while (low + 1 < high) {
+        long long mid = low + (high - low) / 2;
+        if (canProduce(mid)) high = mid;
+        else low = mid;
     }
 
-    int time = 0;
-    while (product > 0) {
-        const auto [curr, increment] = pq.top();
-        pq.pop();
-        product--;
-        time = curr;
-        pq.push({curr + increment, increment});
-    }
-
-    cout << time << endl;
-
+    cout << high << "\n";
+    return 0;
 }
