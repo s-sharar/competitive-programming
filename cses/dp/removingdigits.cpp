@@ -1,27 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MOD = 1000000007;
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, amount;
-    cin >> n >> amount;
+    int n;
+    cin >> n;
 
-    vector<int> coins(n);
-    for (int i = 0; i < n; i++) cin >> coins[i];
+    const int INF = 1e9;
+    vector<int> dp(n + 1, INF);
+    dp[0] = 0;
 
-    vector<int> dp(amount + 1, 0);
-    dp[0] = 1;
-
-    for (int c : coins) {
-        for (int s = c; s <= amount; s++) {
-            dp[s] += dp[s - c];
-            if (dp[s] >= MOD) dp[s] -= MOD;
+    for (int i = 1; i <= n; i++) {
+        int x = i;
+        while (x > 0) {
+            int d = x % 10;
+            x /= 10;
+            if (d == 0) continue;
+            dp[i] = min(dp[i], dp[i - d] + 1);
         }
     }
 
-    cout << dp[amount] << "\n";
+    cout << dp[n] << "\n";
+    return 0;
 }
