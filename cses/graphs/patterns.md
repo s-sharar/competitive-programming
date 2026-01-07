@@ -17,3 +17,5 @@ prims
 kruskals
 
 a* algorithm
+
+bipartitions/2 coloring
