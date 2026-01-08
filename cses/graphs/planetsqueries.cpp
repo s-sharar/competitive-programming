@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// binary lifting
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
