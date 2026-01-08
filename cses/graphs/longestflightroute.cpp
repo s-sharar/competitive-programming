@@ -1,6 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Takeaways: 
+// DAG -> think topo order
+// if processed in topo order, then we can guarantee a node is fully processed before considering its neighbors
+// dp with graphs
+// print path -> store parent refs
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
