@@ -19,3 +19,5 @@ kruskals
 a* algorithm
 
 bipartitions/2 coloring
+
+kosaraju
