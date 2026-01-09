@@ -3,6 +3,8 @@ using namespace std;
 
 using ll = long long;
 
+// functional graph implies unique forward path + eventually cycles
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
